@@ -4,9 +4,10 @@ import { Text } from 'react-native';
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
   state = { email: '',
   password: '',
+  passwordRepeat: '',
   error: '',
   loading: false,
   loggedIn: false
@@ -17,22 +18,29 @@ class LoginForm extends Component {
  //    }
  // }
   onButtonPress(){
-    const { email, password } = this.state;
+    Actions.login();
+  }
+
+  onRegisterButtonPress(){
+    const { email, password, passwordRepeat } = this.state;
 
     this.setState({erorr:'', loading: true})
 
-    firebase.auth().signInWithEmailAndPassword(email,password)
-    .then(this.onLoginSuccess.bind(this))
-    .catch ( this.onLoginFail.bind(this));
-    
+    if(this.state.password === this.state.passwordRepeat){
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(this.onRegisterSuccess.bind(this))
+        .catch ( this.onRegisterFail.bind(this));
+    }
   }
-  onLoginFail() {
+
+  onRegisterFail() {
     this.setState({ error:'Authentication Failed', loading: false})
   }
-  onLoginSuccess(){
+  onRegisterSuccess(){
     this.setState({
       email: '',
       password: '',
+      passwordRepeat: '',
       loading: false,
       error: '',
       loggedIn: true
@@ -43,10 +51,7 @@ class LoginForm extends Component {
     console.log("blisko");
     Actions.home();
   }
-  
-  onRegisterButtonPress(){
-    Actions.register();
-  }
+
 
   renderButton() {
     if(this.state.loading) {
@@ -91,6 +96,15 @@ renderRegisterButton() {
             onChangeText = {password => this.setState({ password })}
           />
         </CardSection>
+        <CardSection>
+          <Input
+            secureTextEntry
+            placeholder = "password"
+            label = "Repeat Password"
+            value = {this.state.passwordRepeat}
+            onChangeText = {passwordRepeat => this.setState({ passwordRepeat })}
+          />
+        </CardSection>
         <Text style={styles.errorTextStyle}>
           {this.state.error}
         </Text>
@@ -110,4 +124,4 @@ const styles = {
       color: 'red'
     }
 }
-export default LoginForm;
+export default RegisterForm;
