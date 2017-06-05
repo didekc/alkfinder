@@ -7,6 +7,15 @@ class Home extends Component {
   onButtonPress(){
     Actions.example();
   }
+
+  onButtonSeeOrdersPress(){
+    Actions.orders();
+  }
+
+  onButtonSeeShopsPress(){
+    Actions.shops();
+  }
+
   render(){
     return(
         <Card>
@@ -16,6 +25,16 @@ class Home extends Component {
           <CardSection>
             <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonPress.bind(this)}>
               teleportuj mnie !
+            </Button>
+          </CardSection>
+          <CardSection>
+            <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonSeeOrdersPress.bind(this)}>
+              Obczaj zamówienia !
+            </Button>
+          </CardSection>
+          <CardSection>
+            <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonSeeShopsPress.bind(this)}>
+              Zamów coś !
             </Button>
           </CardSection>
         </Card>
