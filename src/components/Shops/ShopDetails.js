@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button } from '../common';
 
 const alkos = [
       {alkoId: 1, alkoName: 'aaa', alkoPrice: '1000000000'},

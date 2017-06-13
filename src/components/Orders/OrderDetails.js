@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button } from '../common';
 
 class OrderDetails extends Component {
   render(){
