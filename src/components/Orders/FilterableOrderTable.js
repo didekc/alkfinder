@@ -7,7 +7,7 @@ import SearchOrderBar from './SearchOrderBar';
 
 var ORDERS = [
       {orderCode: '111', orderAddress: 'ul. Pierwsza 1 11-111 Wrocław', delivered: false},
-      {orderCode: '222', orderAddress: 'ul. Druga 2 22-222 Wrocław', delivered: false},
+      {orderCode: '222', orderAddress: 'ul. Druga 2 22-222 Wrocław', delivered: true},
       {orderCode: '333', orderAddress: 'ul. Trzecia 3 33-333 Wrocław', delivered: false},
       {orderCode: '444', orderAddress: 'ul. Czwarta 4 44-444 Wrocław', delivered: false}
   ];

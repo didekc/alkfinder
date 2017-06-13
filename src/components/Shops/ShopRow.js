@@ -14,9 +14,10 @@ class ShopRow extends Component {
     <TouchableHighlight onPress={()=> {this.onPress(this.props.shop)}}>
       <View>
         <CardSection>
-          <Text>{name}</Text>
-          <Text>{address}</Text>
-          <Text>{'\n'}</Text>
+          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',}}>
+            <Text>{name}</Text>
+            <Text>{address}{'\n'}</Text>
+            </View>
         </CardSection>
       </View>
     </TouchableHighlight>

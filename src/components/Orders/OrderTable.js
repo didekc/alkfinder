@@ -15,14 +15,20 @@ class OrderTable extends Component {
     });
     return (
      <Card>
-         <Card>
-        <CardSection>
-            <Text>
-                Kod zamowienia
-                Adres
-                Status
-            </Text>
-        </CardSection>
+        <Card>
+            <CardSection>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',}}>
+                    <Text>
+                        Kod zamowienia
+                    </Text>
+                    <Text>
+                        Adres
+                    </Text>
+                    <Text>
+                        Status
+                    </Text>
+                </View>
+            </CardSection>
         </Card>
         <Card>
             {rows}

@@ -9,19 +9,28 @@ class OrderRow extends Component {
 
   render() {
     var name = this.props.order.delivered ?
-      this.props.order.orderCode :
-      <Text style={{color: 'grey'}}>
+      <Text style={{color: 'green'}}>{this.props.order.orderCode}</Text> :
+      <Text style={{color: 'red'}}>
         {this.props.order.orderCode}
       </Text>;
-    var delivered = this.props.order.delivered ? <Text>X</Text> : <Text>V</Text>;
+    var address = this.props.order.delivered ?
+      <Text style={{color: 'green'}}>{this.props.order.orderAddress}</Text> :
+      <Text style={{color: 'red'}}>
+        {this.props.order.orderAddress}
+      </Text>;
+    var delivered = this.props.order.delivered ? 
+    <Text style={{color: 'green', fontWeight: 'bold'}}>V{'\n'}</Text> : 
+    <Text  style={{color: 'red', fontWeight: 'bold'}}>X{'\n'}</Text>;
+    
     return (
     <TouchableHighlight onPress={()=> {this.onPress(this.props.order)}}>
       <View>
         <CardSection>
-          {name}
-          <Text>{this.props.order.orderAddress}</Text>
-          {delivered}
-          <Text>{'\n'}</Text>
+          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',}}>
+            {name}   
+            {address}
+            {delivered}
+          </View>
         </CardSection>
       </View>
     </TouchableHighlight>

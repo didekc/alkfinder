@@ -18,7 +18,7 @@ class SearchOrderBar extends Component {
             <CardSection>
             <Input
             placeholder = "Szukaj..."
-            label = 'Szukaj: '
+            label = 'Adres: '
             value = {this.props.filterText}
             onChangeText={this.handleFilterTextInputChange}
             />

@@ -18,7 +18,7 @@ class SearchShopBar extends Component {
             <CardSection>
             <Input
             placeholder = "Szukaj..."
-            label = 'Szukaj:'
+            label = 'Nazwa:'
             value = {this.props.filterText}
             onChangeText={this.handleFilterTextInputChange}
             />

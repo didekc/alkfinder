@@ -15,13 +15,17 @@ class ShopTable extends Component {
     });
     return (
      <Card>
-         <Card>
-        <CardSection>
-            <Text>
-                Nazwa
-                Adres
-            </Text>
-        </CardSection>
+        <Card>
+            <CardSection>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',}}>
+                    <Text>
+                        Nazwa
+                    </Text>
+                    <Text>
+                        Adres
+                    </Text>
+                </View>
+            </CardSection>
         </Card>
         <Card>
             {rows}
