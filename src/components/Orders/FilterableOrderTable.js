@@ -20,6 +20,7 @@ class FilterableOrderTable extends Component {
           filterText: '' 
       };
       this.handleFilterTextInput=this.handleFilterTextInput.bind(this);
+      this.handleChangeDeliveryState=this.handleChangeDeliveryState.bind(this);
   }
 
     handleFilterTextInput(filterText) {
@@ -28,13 +29,26 @@ class FilterableOrderTable extends Component {
         });
     }
 
+    handleChangeDeliveryState(order) {
+        for(let i in ORDERS){
+            if(ORDERS[i].orderCode === order.orderCode){
+                ORDERS[i].delivered = !ORDERS[i].delivered; 
+                break;
+            }
+        }
+        this.setState({ORDERS});
+    }
+
   render(){
     return(
         <Card>
             <SearchOrderBar 
             filterText={this.state.filterText}
             onFilterTextInput={this.handleFilterTextInput}/>
-            <OrderTable orders={this.state.orders} filterText={this.state.filterText}/>
+            <OrderTable 
+            orders={this.state.orders} 
+            filterText={this.state.filterText}
+            onDeliveredStateChange={()=>{this.handleChangeDeliveryState}}/>
         </Card>
     );
   }

@@ -3,8 +3,17 @@ import { Text, View, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input, Button } from '../common';
 class OrderRow extends Component {
+ constructor(props){
+   super(props);
+   this.onDeliveredPress = this.onDeliveredPress.bind(this);
+
+ }
   onPress(order){
     Actions.orderDetails({order: order});
+  }
+
+  onDeliveredPress(order){
+    this.props.onDeliveredState(order);
   }
 
   render() {
@@ -23,17 +32,19 @@ class OrderRow extends Component {
     <Text  style={{color: 'red', fontWeight: 'bold'}}>X{'\n'}</Text>;
     
     return (
-    <TouchableHighlight onPress={()=> {this.onPress(this.props.order)}}>
-      <View>
-        <CardSection>
-          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',}}>
+      <CardSection>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',}}>
+          <TouchableHighlight onPress={()=> {this.onPress(this.props.order)}}>
+            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',}}>
             {name}   
             {address}
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={()=> {this.onDeliveredPress(this.props.order)}}>
             {delivered}
-          </View>
-        </CardSection>
-      </View>
-    </TouchableHighlight>
+          </TouchableHighlight>
+        </View>
+      </CardSection>
     );
   }
 }export default OrderRow;
