@@ -24,7 +24,7 @@ class LoginForm extends Component {
     firebase.auth().signInWithEmailAndPassword(email,password)
     .then(this.onLoginSuccess.bind(this))
     .catch ( this.onLoginFail.bind(this));
-    
+
   }
   onLoginFail() {
     this.setState({ error:'Authentication Failed', loading: false})
@@ -40,10 +40,9 @@ class LoginForm extends Component {
     this.onLoggedIn();
   }
   onLoggedIn(){
-    console.log("blisko");
     Actions.home();
   }
-  
+
   onRegisterButtonPress(){
     Actions.register();
   }
@@ -52,7 +51,6 @@ class LoginForm extends Component {
     if(this.state.loading) {
       return <Spinner size = {'small'} />;
     }
-    console.log(this.state.loggedIn);
     return(
     <Button onPress={this.onButtonPress.bind(this)}>
       Log in
@@ -63,7 +61,6 @@ renderRegisterButton() {
    if(this.state.loading) {
       return <Spinner size = {'small'} />;
     }
-    console.log(this.state.loggedIn);
     return(
     <Button onPress={this.onRegisterButtonPress.bind(this)}>
       Register

@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { Text, View, ListView, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input, Button } from '../common';
 import ShopRow from './ShopRow';
+
+  let ertner = 0;
+
 class ShopTable extends Component {
+
   render() {
     var rows = [];
+    var shops = this.props.shops;
     var searched = this.props.filterText.toUpperCase();
-    this.props.shops.forEach(function(shop) {
-      var name = shop.shopName.toUpperCase();
-      if(name.indexOf(searched)!==-1){
-        rows.push(<ShopRow shop={shop} key={shop.shopId} />);
-      }
-    });
+          const chleb = _.map(shops, (shop) => {
+           if(shop.name.indexOf(searched)!==-1){
+             console.log(shop.name);
+             ertner ++;
+           rows.push(<ShopRow key={shop + ertner} shop={shop} />);
+          }
+});
     return (
      <Card>
         <Card>
