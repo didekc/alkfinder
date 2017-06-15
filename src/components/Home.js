@@ -4,36 +4,40 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { Card, CardSection, Button } from './common';
 
-
-
 class Home extends Component {
   constructor() {
       super();
-      var ref = firebase.database().ref(`/roles`);
-    const {currentUser} = firebase.auth();
-
+     this.state = {
+       user:{},
+       uid: 0,
+       isProvider: false
+     }
       };
-  // componentDidMount() {
-
-  //   shops.on('value', snapshot => {
-  //     this.setState({shops: snapshot.val()});
-  //
-  //   });
-  // }
-  // componentDidMount(){
-  //   // var role = firebase.database().ref(`/roles`);
-  //   //   role.on('value', snapshot => {
-  //   //   console.log(role);
-  //   })
-  //     ;
-  // }
-
-  componentDidMount(){
-    this.setState({
-      userID: firebase.auth().currentUser.uid
-    })
+  componentWillMount(){
+    let getUser = setInterval(() => {
+        if ( firebase.auth().currentUser !== null ) {
+            clearInterval(getUser);
+            let user = firebase.auth().currentUser;
+            let uid = user.uid;
+            this.setState({uid, user});
+            this.getUserRole();
+        } else {
+          console.log('Wait for it');
+        }
+      }, 500);
   }
 
+  // componentDidMount(){
+  //
+  // }
+
+  getUserRole(){
+    var id = this.state.uid;
+    var role = firebase.database().ref(`/roles/${id}`);
+      role.on('value', snapshot => {
+        this.setState({isProvider: snapshot.val().isprovider});
+    })
+  }
 
   onButtonSeeOrdersPress(){
     Actions.orders();
@@ -46,48 +50,41 @@ class Home extends Component {
   onButtonSeeChartPress(){
     Actions.OrderView();
   }
-  //e4uLspKOnJczfluYIncBZcYiGpb2
-
   renderContent()
-  {if(firebase.auth()){
-    console.log("here"+this.currentUser);
-    if( false){
-      return(
-          <Card>
-            <CardSection>
-            <Text style={{ fontSize: 20, color: 'blue' }}>  Zalogowano pomyślnie </Text>
-            </CardSection>
-            <CardSection>
-              <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonSeeOrdersPress.bind(this)}>
-                Zamówienia
-              </Button>
-            </CardSection>
-          </Card>
-      );
-
-    }else {
-      return(
-          <Card>
-            <CardSection>
-            <Text style={{ fontSize: 20, color: 'blue' }}>  Zalogowano pomyślnie </Text>
-            </CardSection>
-            <CardSection>
-              <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonSeeChartPress.bind(this)}>
-                Koszyk
-              </Button>
-            </CardSection>
-            <CardSection>
-              <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonSeeShopsPress.bind(this)}>
-                Złóż zamówienie
-              </Button>
-            </CardSection>
-          </Card>
+  {
+      if(this.state.isProvider){
+        return(
+            <Card>
+              <CardSection>
+              <Text style={{ fontSize: 20, color: 'green' }}>  Zalogowano pomyślnie </Text>
+              </CardSection>
+              <CardSection>
+                <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonSeeOrdersPress.bind(this)}>
+                  Zamówienia
+                </Button>
+              </CardSection>
+            </Card>
         );
+      }else {
+        return(
+            <Card>
+              <CardSection>
+              <Text style={{ fontSize: 20, color: 'green' }}>  Zalogowano pomyślnie </Text>
+              </CardSection>
+              <CardSection>
+                 <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonSeeChartPress.bind(this)}>
+                   Koszyk
+                 </Button>
+              </CardSection>
+              <CardSection>
+                <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonSeeShopsPress.bind(this)}>
+                  Złóż zamówienie
+                </Button>
+              </CardSection>
+            </Card>
+          );
     }
   }
-
-  }
-
   render(){
     return(
       <View>

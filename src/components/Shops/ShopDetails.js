@@ -15,8 +15,11 @@ class ShopDetails extends Component {
       };
   }
   componentWillMount(){
-    this.setState({shop: this.props.shop});
-    console.log(this.state.shop)
+    if(this.props.shop){
+      this.setState({shop: this.props.shop});
+      console.log(this.state.shop)
+    }
+
   }
   render(){
     var items = this.state.shop.items;
