@@ -2,11 +2,37 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { Text, View, ListView, TouchableOpacity  } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import firebase from 'firebase';
 import { Card, CardSection, Button, ListItem, Input } from '../common';
 
   let ertner = 0;
+  let cart = [];
 
 class AlkoDetails extends Component {
+  state = {
+    quantity: '',
+    item: this.props.item,
+    orderList: []
+  }
+
+  addToCart(){
+    let element = {};
+    element.item = this.props.item;
+    element.quantity = ertner;
+    cart.push({element});
+    const {currentUser} = firebase.auth();
+    this.setState({
+       quantity: ertner,
+       orderList: cart
+     })
+    firebase.database().ref(`/carts/${currentUser.uid}`)
+    .set({cart})
+    .then( () => {
+      ertner = 0;
+      this.forceUpdate();
+      Actions.pop();
+    });
+  }
 
 render(){
   return(
@@ -56,9 +82,7 @@ render(){
         </TouchableOpacity>
       </CardSection>
       <CardSection>
-        <Button onPress={()=>{
-            Actions.OrderView({quantity: ertner, item: this.props.item});
-          }}>
+        <Button onPress={this.addToCart.bind(this)}>
           Dodaj do koszyka :)
         </Button>
       </CardSection>

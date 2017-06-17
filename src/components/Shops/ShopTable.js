@@ -14,7 +14,7 @@ class ShopTable extends Component {
     var shops = this.props.shops;
     var searched = this.props.filterText.toUpperCase();
           const chleb = _.map(shops, (shop) => {
-           if(shop.name.indexOf(searched)!==-1){
+           if(shop.name.toUpperCase().indexOf(searched)!==-1){
              console.log(shop.name);
              ertner ++;
            rows.push(<ShopRow key={shop + ertner} shop={shop} />);

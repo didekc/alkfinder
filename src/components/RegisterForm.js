@@ -12,11 +12,7 @@ class RegisterForm extends Component {
   loading: false,
   loggedIn: false
  };
- // componentWillUpdate(nextProps, nextState){
- //    if (nextState.loggedIn == true && this.state.loggedIn == false) {
- //      Actions.Home();
- //    }
- // }
+
   onButtonPress(){
     Actions.login();
   }
@@ -48,8 +44,14 @@ class RegisterForm extends Component {
     this.onLoggedIn();
   }
   onLoggedIn(){
+    const  { currentUser } = firebase.auth();
+    var isprovider = false;
     console.log("blisko");
-    Actions.home();
+    firebase.database().ref(`/roles/${currentUser.uid}`)
+    .set({isprovider: false})
+    .then( () => {
+      Actions.home();
+    });
   }
 
 

@@ -23,7 +23,7 @@ RouterComponent = () => {
       <Scene key="orderDetails" component={OrderDetails} title="Szczegóły zamówienia" />
       <Scene key="shops" component={ShopList} title="Lista sklepów" />
       <Scene key="shopDetails" component={ShopDetails} title="Szczegóły sklepu" />
-      <Scene key="OrderView" component={OrderView} title="Złóż zamówienie" />
+      <Scene key="OrderView" component={OrderView} title="Koszyk" />
     </Router>
   );
 };
