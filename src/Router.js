@@ -10,6 +10,7 @@ import ShopList from './components/Shops/FilterableShopTable';
 import ShopDetails from './components/Shops/ShopDetails';
 import AlkoDetails from './components/Shops/AlkoDetails';
 import OrderView from './components/Shops/OrderView';
+import ConfirmOrder from './components/Shops/ConfirmOrder';
 
 RouterComponent = () => {
   return(
@@ -24,6 +25,7 @@ RouterComponent = () => {
       <Scene key="shops" component={ShopList} title="Lista sklepów" />
       <Scene key="shopDetails" component={ShopDetails} title="Szczegóły sklepu" />
       <Scene key="OrderView" component={OrderView} title="Koszyk" />
+      <Scene key="confirmOrder" component={ConfirmOrder} title="Potwierdź" />
     </Router>
   );
 };

@@ -69,7 +69,7 @@ class Home extends Component {
         return(
             <Card>
               <CardSection>
-              <Text style={{ fontSize: 20, color: 'green' }}>  Zalogowano pomyślnie </Text>
+              <Text style={{ fontSize: 16, color: 'green' }}>  {this.props.info} </Text>
               </CardSection>
               <CardSection>
                  <Button style={{ backgroundColor: 'red' }} onPress={this.onButtonSeeChartPress.bind(this)}>

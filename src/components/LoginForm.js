@@ -40,7 +40,7 @@ class LoginForm extends Component {
     this.onLoggedIn();
   }
   onLoggedIn(){
-    Actions.home();
+    Actions.home({info: "Zalogowano pomyślnie"});
   }
 
   onRegisterButtonPress(){
@@ -49,21 +49,21 @@ class LoginForm extends Component {
 
   renderButton() {
     if(this.state.loading) {
-      return <Spinner size = {'small'} />;
+      return (<Text></Text>);
     }
     return(
     <Button onPress={this.onButtonPress.bind(this)}>
-      Log in
+      Zaloguj
     </Button>
   );
 }
 renderRegisterButton() {
    if(this.state.loading) {
-      return <Spinner size = {'small'} />;
+      return <Spinner size = {'large'} />;
     }
     return(
     <Button onPress={this.onRegisterButtonPress.bind(this)}>
-      Register
+      Nie mam konta
     </Button>
   );
 }
@@ -93,6 +93,8 @@ renderRegisterButton() {
         </Text>
         <CardSection>
           {this.renderButton()}
+        </CardSection>
+        <CardSection>
           {this.renderRegisterButton()}
         </CardSection>
       </Card>

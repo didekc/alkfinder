@@ -54,26 +54,25 @@ class RegisterForm extends Component {
     });
   }
 
-
   renderButton() {
     if(this.state.loading) {
-      return <Spinner size = {'small'} />;
+      return (<Text></Text>);
     }
     console.log(this.state.loggedIn);
     return(
     <Button onPress={this.onButtonPress.bind(this)}>
-      Log in
+      Mam już konto
     </Button>
   );
 }
 renderRegisterButton() {
    if(this.state.loading) {
-      return <Spinner size = {'small'} />;
+      return <Spinner size = {'large'} />;
     }
     console.log(this.state.loggedIn);
     return(
     <Button onPress={this.onRegisterButtonPress.bind(this)}>
-      Register
+      Stwórz konto
     </Button>
   );
 }
@@ -111,8 +110,10 @@ renderRegisterButton() {
           {this.state.error}
         </Text>
         <CardSection>
-          {this.renderButton()}
           {this.renderRegisterButton()}
+        </CardSection>
+        <CardSection>
+          {this.renderButton()}
         </CardSection>
       </Card>
     );

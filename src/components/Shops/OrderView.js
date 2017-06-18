@@ -6,6 +6,8 @@ import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Button, ListItem } from '../common';
 import OrderRow from './OrderRow';
 
+let totalCost=0;
+
 class OrderView extends Component {
   constructor(){
       super();
@@ -30,35 +32,28 @@ class OrderView extends Component {
       console.log(this.state.cart);
     });
   }
-  // componentWillMount(){
-  //   console.log( this.props.quantity);
-  //   this.setState({
-  //     item: this.props.item,
-  //     quantity: this.props.quantity,
-  //     toJaHere: this.currentUser
-  //   })
-  // }
-  handleOrder(){
 
+  componentWillUnmount()
+  {
   }
 
-  // return(<CardSection>
-  //     <Text>Nazwa: {this.props.item.name} </Text>
-  //   </CardSection>
-  //   <CardSection>
-  //     <Text>
-  //    {this.summary()}
-  //     </Text>
-  //   </CardSection>
-  //   <CardSection>
-  //     <Button onPress={this.handleOrder.bind(this)}>
-  //       Kup teraz :)
-  //     </Button>
-  //   </CardSection>
-  // );
+  renderButton() {
+    return(
+      <CardSection>
+        <Button onPress={this.handleOrder.bind(this)}>
+          Kup teraz :)
+        </Button>
+      </CardSection>
+    );
+  }
+  handleOrder(){
+    // this.setState({totalCost: totalCost});
+    Actions.confirmOrder({cart: this.state.cart, totalCost: totalCost});
+  }
+
   renderOrderList(){
     let rows = [];
-    let totalCost = 0;
+    totalCost = 0;
     let cart = this.state.cart;
     let key = 0;
     if(cart.indexOf()){
@@ -71,6 +66,7 @@ class OrderView extends Component {
     })
   }
   console.log(totalCost);
+  //this.setState({totalCost: totalCost});
       if(0 < rows.length)
       {
         return(
@@ -81,6 +77,7 @@ class OrderView extends Component {
                 Cena: {totalCost}
               </Text>
             </CardSection>
+            {this.renderButton()}
           </Card>
         );
       }else{

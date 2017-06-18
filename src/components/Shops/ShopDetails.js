@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { Text, View, ListView } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Button, ListItem } from '../common';
 
 let ertner = 0;

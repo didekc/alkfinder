@@ -34,9 +34,55 @@ class AlkoDetails extends Component {
     });
   }
 
+  renderButton(){
+    if(this.props.item.availability !=="Brak"){
+      return(
+        <View>
+          <CardSection>
+            <TouchableOpacity onPress={() => {
+                if(ertner > 0)
+                {
+                  ertner --;
+                  this.forceUpdate();
+                }
+              }}>
+              <Text style={{fontSize: 52, paddingLeft: 130}}>
+                -
+              </Text>
+            </TouchableOpacity>
+            <Text style={{fontSize: 52}}>
+                {ertner}
+            </Text>
+            <TouchableOpacity onPress={() => {
+                ertner ++;
+                this.forceUpdate();
+              }}>
+              <Text style={{fontSize: 52}}>
+                +
+              </Text>
+            </TouchableOpacity>
+          </CardSection>
+          <CardSection>
+            <Button onPress={this.addToCart.bind(this)}>
+              Dodaj do koszyka :)
+            </Button>
+          </CardSection>
+        </View>
+      )
+    }else{
+      return(
+        <CardSection>
+          <Text>
+            Produkt chwilowo niedostępny
+          </Text>
+        </CardSection>
+      )
+    }
+  }
+
 render(){
   return(
-    <View>
+    <Card>
       <CardSection>
         <Text>
           {this.props.item.name}
@@ -57,36 +103,8 @@ render(){
           {this.props.item.cost}
         </Text>
       </CardSection>
-      <CardSection>
-        <TouchableOpacity onPress={() => {
-            if(ertner > 0)
-            {
-              ertner --;
-              this.forceUpdate();
-            }
-          }}>
-          <Text style={{fontSize: 52, paddingLeft: 130}}>
-            -
-          </Text>
-        </TouchableOpacity>
-        <Text style={{fontSize: 52}}>
-            {ertner}
-        </Text>
-        <TouchableOpacity onPress={() => {
-            ertner ++;
-            this.forceUpdate();
-          }}>
-          <Text style={{fontSize: 52}}>
-            +
-          </Text>
-        </TouchableOpacity>
-      </CardSection>
-      <CardSection>
-        <Button onPress={this.addToCart.bind(this)}>
-          Dodaj do koszyka :)
-        </Button>
-      </CardSection>
-    </View>
+        {this.renderButton()}
+    </Card>
   );
 }
 }

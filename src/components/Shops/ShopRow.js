@@ -4,7 +4,6 @@ import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input, Button } from '../common';
 class ShopRow extends Component {
   onPress(shop){
-    console.log(shop);
     Actions.shopDetails({shop: shop});
   }
 
